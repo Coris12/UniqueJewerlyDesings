@@ -8,14 +8,16 @@ package uniquejewerlydesings.control;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import uniquejewerlydesings.DBmodelo.clienteDB;
+import uniquejewerlydesings.DBmodelo.cuerpoFacturaDB;
 import uniquejewerlydesings.DBmodelo.empleadoDB;
 import uniquejewerlydesings.DBmodelo.facturaDB;
 import uniquejewerlydesings.DBmodelo.personaDB;
 import uniquejewerlydesings.DBmodelo.productoDB;
 import uniquejewerlydesings.DBmodelo.proveedorDB;
 import uniquejewerlydesings.modelo.persona;
-import uniquejewerlydesings.vista.CrudProveedor;
 import uniquejewerlydesings.vista.Factura;
+import uniquejewerlydesings.vista.GenerarQR;
+import uniquejewerlydesings.vista.ListaFactura;
 import uniquejewerlydesings.vista.ListaPersonas;
 import uniquejewerlydesings.vista.ListaProductos;
 import uniquejewerlydesings.vista.MenuPrincipal;
@@ -55,7 +57,19 @@ public class menuControl {
     Factura vistaFactura = new Factura();
     facturaDB factura = new facturaDB();
     clienteDB clienteDB = new clienteDB();
-    facturaControl controlfactura = new facturaControl(vistaFactura, factura, productodb, personaDB, clienteDB);
+    cuerpoFacturaDB cuerpoDB=new cuerpoFacturaDB();
+    facturaControl controlfactura = new facturaControl(vistaFactura, factura, productodb, personaDB, clienteDB,cuerpoDB);
+    
+    //instancias para la lista de la factura
+    ListaFactura vistaLista = new ListaFactura();
+    cuerpoFacturaDB cuerpoBD=new cuerpoFacturaDB();
+    Factura vistaFac = new Factura();
+    facturaDB facDB = new facturaDB(); 
+    productoDB proDb = new productoDB(); 
+    cuerpoFacturaDB cuerpoFactDB = new cuerpoFacturaDB(); 
+    
+    facturaControl factCtrl = new facturaControl(vistaFac,facDB,proDb,personaDB,clienteDB,cuerpoFactDB); 
+    listaFacturaControl control=new listaFacturaControl(cuerpoBD, vistaLista, vistaFac, factCtrl);
 
     // instancias para el empleado
     empleadoDB modeloEmple = new empleadoDB();
@@ -70,19 +84,20 @@ public class menuControl {
     proveedorDB proveedorDB = new proveedorDB();
     RegistroProveedor vistaProveedor = new RegistroProveedor();
     proveedorControl controlProvee = new proveedorControl(proveedorDB, vistaProveedor);
+    
+    // instacias para el boton de QR
+    GenerarQR qr = new GenerarQR();
+    QRControl controlQr = new QRControl(qr);
+    
 
-    
-     proveedorDB proveedorDB2 = new proveedorDB();
-    CrudProveedor vistaCrudProvee = new CrudProveedor();
-    crudProveedorControl ctlCrudProve = new crudProveedorControl(proveedorDB2, vistaCrudProvee);
-    
     public void iniciarControl() {
         menu.setVisible(true);
         //accion para que inicie el btn de persona ubicado en el menu item
         menu.getBtnNewCustom().addActionListener(e -> btnPersona());
         menu.getJListCustom().addActionListener(e -> listaPersona());
         menu.getBtnListProducts().addActionListener(e -> listaProdcutos());
-        menu.getBtnnewInvoice().addActionListener(e -> factura());
+        menu.getBtnnewInvoice().addActionListener(e -> btnFactura());
+        menu.getBtnInvoiceList().addActionListener(e -> listaFactura());
 
         //botones para las opcines del producto
         menu.getBtnNewProduct().addActionListener(e -> btnNuevoProducto());
@@ -94,7 +109,10 @@ public class menuControl {
 
         //botones para las opciones del proveedor 
         menu.getBtnListProveedor().addActionListener(e -> btnNuevoProveedor());
-        menu.getBtnListProvider().addActionListener(e -> btnListarProve());
+        
+        
+        //botones para las opciones del QR 
+        menu.getBtnGenerarQr().addActionListener(e -> btnQR());
     }
 
     private void showPanel(JPanel p) {
@@ -106,7 +124,6 @@ public class menuControl {
         menu.getContent().repaint();
     }
 
-    
     public void btnPersona() {
 
         showPanel(vistaPersona.getPanelIngreso());
@@ -149,15 +166,20 @@ public class menuControl {
     }
     // --- metodos finaliza opciones para el prodcuto
 
+    // metodos de la factura
     public void factura() {
         controlfactura.iniciarControl();
     }
+     public void listaFactura(){
+         control.inciaControl();
+     }
+     // -- fin metodos para la factura
 
     //-- metodos para el empleado
     public void btnNuevoEmpleado() {
         controlEmple.iniciarControl();
     }
-
+// -- fin metodos para el empleado
     public void listaEmpleados() {
         controlCrudEmple.iniciarControl();
     }
@@ -168,9 +190,23 @@ public class menuControl {
         showPanel(vistaProveedor.getPnlRegisProvedor());
         controlProvee.iniciarControl();
     }
-
-    public void btnListarProve(){
-        ctlCrudProve.iniciarControl();
+    // fin metodos para el proveedor 
+    
+    
+     // -- metodos para el proveedor 
+    public void btnFactura() {
+        showPanel(vistaFactura.getPnlFactura());
+        controlfactura.iniciarControl();
     }
     // fin metodos para el proveedor 
+
+
+      // -- metodos para el QR
+    public void btnQR() {
+        showPanel(qr.getPnlQr());
+        controlQr.iniciarControl();
+    }
+    // fin metodos para el QR   
 }
+
+
