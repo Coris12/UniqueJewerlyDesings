@@ -51,6 +51,7 @@ public class facturaControl extends validacion {
     static double totalp;
     static double totalabono;
     static double iva;
+    static double roundDbl;
 
     double abono;
     double valor_pendiente;
@@ -289,7 +290,7 @@ public class facturaControl extends validacion {
                             abono = Double.parseDouble(vistaFactura.getTxtAbono().getText());
 //                    total = total - abono;
                             totalabono = totalp - abono;
-                              double roundDbl = Math.round(totalabono*100.0)/100.0;
+                            roundDbl = Math.round(totalabono*100.0)/100.0;
                             vistaFactura.getTxtValorPediente().setText("" + roundDbl);
 //                    vistaFactura.getTxtValorPediente().setText("" + total);
                             System.out.println("total - abono" + roundDbl);
