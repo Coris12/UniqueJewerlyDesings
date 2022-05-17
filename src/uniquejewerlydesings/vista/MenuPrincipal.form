@@ -223,11 +223,17 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/iconsMenu/proveedor.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Provider"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="btnListProveedor">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/iconsMenu/new customer.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="New Provider"/>
               </Properties>
               <Events>

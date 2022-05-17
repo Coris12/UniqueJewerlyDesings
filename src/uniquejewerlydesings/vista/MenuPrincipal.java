@@ -475,8 +475,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconsMenu/proveedor.png"))); // NOI18N
         jMenu2.setText("Provider");
 
+        btnListProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconsMenu/new customer.png"))); // NOI18N
         btnListProveedor.setText("New Provider");
         btnListProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
