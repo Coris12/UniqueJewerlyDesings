@@ -51,9 +51,7 @@ public class facturaControl extends validacion {
     static double totalp;
     static double totalabono;
     static double iva;
-    static double roundTotal;
-    static double roundTotalP;
-    static double roundAbono;
+
     double abono;
     double valor_pendiente;
     public static String id_producto;
@@ -243,7 +241,7 @@ public class facturaControl extends validacion {
             String cantProdTab;
             double x = 0.0, y = 0.0, calcula = 0.0;
             int canti = 0;
-            iva = 6.27;
+            iva=6.27;
 
             if (filaSleccionada == -1) {
                 JOptionPane.showMessageDialog(null, "Select a row", "check", JOptionPane.WARNING_MESSAGE);
@@ -279,25 +277,22 @@ public class facturaControl extends validacion {
                         vistaFactura.getTxtpricetotal().setText("" + total);
 
                         if (vistaFactura.getTxtAbono().getText().contains("") || vistaFactura.getTxtReparacion().getText().contains("")) {
-                            total = total + calcula + iva;
-                            roundTotal = Math.round(total * 100.0) / 100.0;
-                            System.out.println("total precio sin abono y sin repara ..." + roundTotal);
-                            vistaFactura.getTxtpricetotal().setText("" + roundTotal);
+                            total = total + calcula;
+                            System.out.println("total precio sin abono y sin repara ..." + total);
+                            vistaFactura.getTxtpricetotal().setText("" + total);
 
                             precioR = Double.parseDouble(vistaFactura.getTxtReparacion().getText());
-                            totalp = total + precioR + iva;
-                            roundTotalP = Math.round(totalp * 100.0) / 100.0;
-                            System.out.println("total + repa " + roundTotalP);
-                            vistaFactura.getTxtpricetotal().setText("" + roundTotalP);
+                            totalp = total + precioR+iva;
+                            System.out.println("total + repa " + totalp);
+                            vistaFactura.getTxtpricetotal().setText("" + totalp);
 
                             abono = Double.parseDouble(vistaFactura.getTxtAbono().getText());
 //                    total = total - abono;
-                            totalabono = totalp - abono + iva;
-                            roundAbono = Math.round(totalabono * 100.0) / 100.0;
-
-                            vistaFactura.getTxtValorPediente().setText("" + roundAbono);
+                            totalabono = totalp - abono;
+                              double roundDbl = Math.round(totalabono*100.0)/100.0;
+                            vistaFactura.getTxtValorPediente().setText("" + roundDbl);
 //                    vistaFactura.getTxtValorPediente().setText("" + total);
-                            System.out.println("total - abono" + roundAbono);
+                            System.out.println("total - abono" + roundDbl);
                         } else {
 //
 //                    abono = Double.parseDouble(vistaFactura.getTxtAbono().getText());
@@ -626,12 +621,12 @@ public class facturaControl extends validacion {
                         parrafo.setAlignment(Paragraph.ALIGN_CENTER);
                         parrafo.add("Invoice. \n \n");
                         parrafo.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
-
+                        
                         Paragraph di = new Paragraph("108 Main Street Hightstown, NJ 08520 USA");
                         di.getFont().setStyle(Font.BOLD);
                         di.setAlignment(Chunk.ALIGN_LEFT);
                         di.getFont().setSize(10);
-
+                        
                         Paragraph pho = new Paragraph("(609) 308-6534");
                         pho.getFont().setStyle(Font.BOLD);
                         pho.setAlignment(Chunk.ALIGN_LEFT);
@@ -761,9 +756,8 @@ public class facturaControl extends validacion {
                 }
 //            }
             }
-        }
-    }
-
+        }    
+}
     public void inhabilitarCamposInvoice() {
         vistaFactura.getTxtnombres().setEnabled(false);
         vistaFactura.getTxtdireccion().setEnabled(false);
