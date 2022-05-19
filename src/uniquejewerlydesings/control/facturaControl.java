@@ -185,17 +185,25 @@ public class facturaControl extends validacion {
     }
 
     public void limpiarTabla() {
-        int canFilas = vistaFactura.getTablaProductos().getRowCount() - 1;
-        modeloTab.setRowCount(0);
-        System.out.println("llegoooo");
-        for (int i = canFilas - 1; i >= 0; i--) {
-            System.out.println("i: " + i + " Filas: " + canFilas);
-            modeloTab.removeRow(i);
-        }
+        DefaultTableModel modeloTabla = (DefaultTableModel) vistaFactura.getTablaProductos().getModel();
+        modeloTabla.setRowCount(0);
+//        for (int i = canFilas - 1; i > 0; i--) {
+//            System.out.println("i: " + i + " Filas: " + canFilas);
+//            modeloTab.removeRow(i);
+//        }
+//        modeloTab.getDataVector().removeAllElements();
+//        vistaFactura.getTablaProductos().updateUI();
+
     }
 
     public void cargarLista() {
-        //limpiarTabla(canFilas);
+        
+        int canFilas = vistaFactura.getTablaProductos().getRowCount(); //obtenemos la cantidad de filas
+        System.out.println("canitd filas: "+canFilas);
+        if(canFilas>0){
+            limpiarTabla(); 
+        }
+        
         modeloTab = (DefaultTableModel) vistaFactura.getTablaProductos().getModel();
         List<producto> lista;
         //  modelo.setIdpersona(vista.getTxtBuscar().getText());
